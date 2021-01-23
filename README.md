@@ -9,3 +9,14 @@ So far, we know we want to use:
 - Chatbot to talk to people
 - Preferences based on user bio
 - Should we add a user interface?
+
+Resources:
+
+Selenium install guide & documentation:
+https://selenium-python.readthedocs.io/installation.html
+
+Python documentation:
+https://docs.python.org/3/
+
+What we might use for images:
+https://thispersondoesnotexist.com/
