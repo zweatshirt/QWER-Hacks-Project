@@ -57,16 +57,18 @@ class behaviorFlow:
         #Choose what direction to swipe
         swiper = random.uniform(0,1)
         if swiper<0.2:
-            print("Swipe left")
+            print("Swipe Left")
+            driver.swipe("left")
         else:
             print("Swipe Right")
+            driver.swipe("right")
         return
     
     def message(self,driver):
         #Lets do some chatting
         print("Message")
-        return
+        # driver.random_message()
         
-driver = 0
-coilette = behaviorFlow()
-coilette.chooseBehavior(driver)
+# driver = 0
+# coilette = behaviorFlow()
+# coilette.chooseBehavior(driver)

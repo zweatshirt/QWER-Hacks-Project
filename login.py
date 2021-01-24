@@ -27,9 +27,11 @@ class Login:
         # init driver
         self.driver = webdriver.Chrome(ChromeDriverManager().install(),
                                        chrome_options=chrome_options)
-        self.email = "coilettebendher@gmail.com"
+        # self.email = "coilettebendher@gmail.com"
+        self.email = "coilettebendher2@gmail.com"
         self.password = "thisisagenericpassword123"
-        self.number = "2247898554"  # number to sign in
+        # self.number = "2247898554"  # number to sign in
+        self.number = "3125699159"  # number to sign in
         self.wait = WebDriverWait(self.driver, 50)
 
     def goto_site(self, site):
@@ -97,8 +99,10 @@ class Login:
             # enter email
             sign_in_field = self.wait.until(
                 EC.element_to_be_clickable(
-                    (By.XPATH,
-                     "/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[1]/div/form/span/section/div/div/div[1]/div/div[1]/div/div[1]/input")
+                    (By.CLASS_NAME, 
+                    "whsOnd")
+                    # (By.XPATH,
+                    #  "/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[1]/div/form/span/section/div/div/div[1]/div/div[1]/div/div[1]/input")
                 )
             )
             sign_in_field.send_keys(self.email)
