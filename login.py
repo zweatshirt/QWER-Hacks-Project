@@ -30,6 +30,7 @@ class Login:
         self.email = "coilettebendher@gmail.com"
         self.password = "thisisagenericpassword123"
         self.number = "2247898554"  # number to sign in
+        self.wait = WebDriverWait(self.driver)
 
     def goto_site(self, site):
         # Used JS scripts to ensure that new windows could be opened
@@ -44,7 +45,7 @@ class Login:
 
     def login_driver(self):
         try:
-            login_btn = WebDriverWait(self.driver, 50).until(
+            login_btn = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.XPATH,
                      "/html/body/div[1]/div/div[1]/div/main/div[1]/div/div/div/div/header/div/div[2]/div[2]/button/span")
@@ -52,7 +53,7 @@ class Login:
             )
             login_btn.click()
 
-            login_by_num = login_btn = WebDriverWait(self.driver, 50).until(
+            login_by_num = login_btn = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.XPATH,
                      "//*[@id=\"modal-manager\"]/div/div/div[1]/div/div[3]/span/div[3]/button/span[2]")
@@ -60,7 +61,7 @@ class Login:
             )
             login_by_num.click()
 
-            enter_num = login_by_num = login_btn = WebDriverWait(self.driver, 50).until(
+            enter_num = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.XPATH,
                      "/html/body/div[2]/div/div/div[1]/div[2]/div/input")
@@ -68,7 +69,7 @@ class Login:
             )
             enter_num.send_keys(self.number)
 
-            continue_btn = login_by_num = login_btn = WebDriverWait(self.driver, 20).until(
+            continue_btn = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.XPATH,
                      "/html/body/div[2]/div/div/div[1]/button/span")
@@ -85,14 +86,14 @@ class Login:
     # TODO: finish this portion
     def grab_num_driver(self):
         try:
-            login_btn = WebDriverWait(self.driver, 20).until(
+            login_btn = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.LINK_TEXT, "Sign in")
                 )
             )
             login_btn.click()
 
-            sign_in_field = WebDriverWait(self.driver, 35).until(
+            sign_in_field = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.XPATH,
                      "/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[1]/div/form/span/section/div/div/div[1]/div/div[1]/div/div[1]/input")
@@ -100,7 +101,7 @@ class Login:
             )
             sign_in_field.send_keys(self.email)
 
-            next_btn = WebDriverWait(self.driver, 30).until(
+            next_btn = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.XPATH,
                      "/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/div/button/div[2]")
@@ -108,7 +109,7 @@ class Login:
             )
             next_btn.click()
 
-            password_field = WebDriverWait(self.driver, 35).until(
+            password_field = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.XPATH,
                      "/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[1]/div/form/span/section/div/div/div[1]/div[1]/div/div/div/div/div[1]/div/div[1]/input")
@@ -116,7 +117,7 @@ class Login:
             )
             password_field.send_keys(self.password)
 
-            next_btn_two = WebDriverWait(self.driver, 30).until(
+            next_btn_two = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.XPATH,
                      "/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/div/button/div[2]")
@@ -124,7 +125,7 @@ class Login:
             )
             next_btn_two.click()
 
-            msg_btn = WebDriverWait(self.driver, 20).until(
+            msg_btn = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.XPATH,
                      "/html/body/div[1]/div[2]/div[2]/gv-side-nav/div/div/gmat-nav-list/a[2]/div/div/span[2]")
@@ -132,7 +133,7 @@ class Login:
             )
             msg_btn.click()
 
-            message = WebDriverWait(self.driver, 20).until(
+            message = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.PARTIAL_LINK_TEXT,
                      "Your Tinder code is")
