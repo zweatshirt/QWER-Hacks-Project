@@ -22,7 +22,6 @@ chrome_options.add_argument('window-size={},{}'.format(random.randint(1000, 1920
 
 
 class Login:
-
     def __init__(self):
         # init driver
         self.driver = webdriver.Chrome(ChromeDriverManager().install(),
@@ -75,7 +74,6 @@ class Login:
                 )
             )
             continue_btn.click()
-
         finally:
             pass
 
@@ -140,7 +138,6 @@ class Login:
                 )
             )
             message.click()
-
         finally:
             pass
 
