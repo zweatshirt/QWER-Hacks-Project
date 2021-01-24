@@ -141,17 +141,77 @@ class Login:
             # attempt to click into message, needs work
             message = self.wait.until(
                 EC.element_to_be_clickable(
-                    (By.CLASS_NAME,
-                     "rkljfb-biJj")
+                    (By.XPATH,
+                     "//*[@gv-test-id='text-message-content']")
                 )
             )
             message.click()
+
+            messagetxt = self.wait.until(
+                EC.element_to_be_clickable(
+                    (By.XPATH,
+                     "//*[@gv-test-id='bubble']")
+                )
+            )
+            text = messagetxt.text
+            # my stupid text editor automatically changes lambdas to regular funcs
+            def pin(x): return [str(char) for char in x.split() if char.isdigit()]
+            return pin(text)
+
         finally:
             pass
 
     # last function to be called after the code sent to the number is grabbed
-    def enter_tinder():
-        pass
+    def enter_tinder(self, pin):
+        field1 = self.wait.until(
+            EC.element_to_be_clickable(
+                (By.XPATH,
+                    "//*[@id=\"modal-manager\"]/div/div/div[1]/div[3]/input[1]")
+            )
+        )
+        field1.send_keys(pin[0][0])
+        field2 = self.wait.until(
+            EC.element_to_be_clickable(
+                (By.XPATH,
+                    "//*[@id=\"modal-manager\"]/div/div/div[1]/div[3]/input[2]")
+            )
+        )
+        field2.send_keys(pin[0][1])
+        field3 = self.wait.until(
+            EC.element_to_be_clickable(
+                (By.XPATH,
+                    "//*[@id=\"modal-manager\"]/div/div/div[1]/div[3]/input[3]")
+            )
+        )
+        field3.send_keys(pin[0][2])
+        field4 = self.wait.until(
+            EC.element_to_be_clickable(
+                (By.XPATH,
+                    "//*[@id=\"modal-manager\"]/div/div/div[1]/div[3]/input[4]")
+            )
+        )
+        field4.send_keys(pin[0][3])
+        field5 = self.wait.until(
+            EC.element_to_be_clickable(
+                (By.XPATH,
+                    "//*[@id=\"modal-manager\"]/div/div/div[1]/div[3]/input[5]")
+            )
+        )
+        field5.send_keys(pin[0][4])
+        field6 = self.wait.until(
+            EC.element_to_be_clickable(
+                (By.XPATH,
+                    "//*[@id=\"modal-manager\"]/div/div/div[1]/div[3]/input[6]")
+            )
+        )
+        field6.send_keys(pin[0][5])
+        continue_btn = self.wait.until(
+            EC.element_to_be_clickable(
+                (By.XPATH,
+                    "//*[@id=\"modal-manager\"]/div/div/div[1]/button")
+            )
+        )
+        continue_btn.click()
 
 
 # move to main when ready:
@@ -160,6 +220,6 @@ print(login.parse_time())
 login.goto_site("tinder")
 login.login_driver()
 login.goto_site("google_voice")
-login.grab_num_driver()
+pin = login.grab_num_driver()
 login.driver.switch_to.window(login.driver.window_handles[0])
-# add login.enter_tinder here
+login.enter_tinder(pin)
