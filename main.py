@@ -23,7 +23,7 @@ class TinderDriver:
     def create_bio():
         pass
 
-    def swipe(direction):
+    def swipe(self, direction):
         element = self.driver.find_elements_by_class_name("recsPage")[0]
         if(direction == 'left'):
             element.send_keys(Keys.LEFT)

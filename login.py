@@ -135,8 +135,6 @@ class Login:
             except StaleElementReferenceException:
                 next_btn_two = self.driver.find_element_by_class_name('VfPpkd-RLmnJb')
                 next_btn_two.click()
-            # print(next_btn_two)
-            # next_btn_two.click()
 
             # hit messages button
             msg_btn = self.wait.until(
@@ -147,13 +145,20 @@ class Login:
             )
             msg_btn.click()
 
-            # attempt to click into message, needs work
+            
             message = self.wait.until(
                 EC.element_to_be_clickable(
-                    (By.CLASS_NAME,
-                     "rkljfb-biJj")
+                    (By.XPATH, "//div[@class='md-virtual-repeat-offsetter']")
                 )
             )
+
+            # attempt to click into message, needs work
+            # message = self.wait.until(
+            #     EC.element_to_be_clickable(
+            #         (By.CLASS_NAME,
+            #          "rkljfb-biJj")
+            #     )
+            # )
             message.click()
         finally:
             pass
