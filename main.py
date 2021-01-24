@@ -23,8 +23,12 @@ class TinderDriver:
     def create_bio():
         pass
 
-    def swipe():
-        pass
+    def swipe(direction):
+        element = self.driver.find_elements_by_class_name("recsPage")[0]
+        if(direction == 'left'):
+            element.send_keys(Keys.LEFT)
+        elif(direction == 'right'):
+            element.send_keys(Keys.RIGHT)
 
     def return_home(self):
         url = "https://tinder.com/app/recs"

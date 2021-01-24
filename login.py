@@ -5,6 +5,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import StaleElementReferenceException
 from fake_useragent import UserAgent
 import datetime
 import random
@@ -123,11 +124,19 @@ class Login:
             # hit second next button
             next_btn_two = self.wait.until(
                 EC.element_to_be_clickable(
-                    (By.XPATH,
-                     "/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/div/button/div[2]")
+                    # (By.XPATH,
+                    #  "/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/div/button/div[2]")
+                    (By.CLASS_NAME, 
+                    'VfPpkd-RLmnJb')
                 )
             )
-            next_btn_two.click()
+            try:
+                next_btn_two.click()
+            except StaleElementReferenceException:
+                next_btn_two = self.driver.find_element_by_class_name('VfPpkd-RLmnJb')
+                next_btn_two.click()
+            # print(next_btn_two)
+            # next_btn_two.click()
 
             # hit messages button
             msg_btn = self.wait.until(
