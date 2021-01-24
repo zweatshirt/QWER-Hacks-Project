@@ -7,11 +7,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import StaleElementReferenceException
 from fake_useragent import UserAgent
-import datetime
+# import datetime
 import random
 
 user_agent = UserAgent()
-
 rand_user = user_agent.random
 
 # needed to bypass captcha
@@ -44,6 +43,9 @@ class Login:
             self.driver.execute_script("window.open('')")
             self.driver.switch_to.window(login.driver.window_handles[1])
             self.driver.get("https://voice.google.com/about")
+        elif sitee == "homepage":
+            self.driver.execute_script("window.open('')")
+            self.driver.switch_to.window(login.driver.window_handles[2])
 
     def login_driver(self):
         try:
@@ -81,9 +83,9 @@ class Login:
         finally:
             pass
 
-    def parse_time(self):
-        stringify_time = datetime.datetime.now().strftime("%I:%M %p")
-        return stringify_time[1:] if stringify_time[0] == "0" else stringify_time
+    # def parse_time(self):
+    #     stringify_time = datetime.datetime.now().strftime("%I:%M %p")
+    #     return stringify_time[1:] if stringify_time[0] == "0" else stringify_time
 
     # TODO: finish this portion
     def grab_num_driver(self):
@@ -99,8 +101,8 @@ class Login:
             # enter email
             sign_in_field = self.wait.until(
                 EC.element_to_be_clickable(
-                    (By.CLASS_NAME, 
-                    "whsOnd")
+                    (By.CLASS_NAME,
+                     "whsOnd")
                     # (By.XPATH,
                     #  "/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[1]/div/form/span/section/div/div/div[1]/div/div[1]/div/div[1]/input")
                 )
@@ -130,8 +132,8 @@ class Login:
                 EC.element_to_be_clickable(
                     # (By.XPATH,
                     #  "/html/body/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/div/button/div[2]")
-                    (By.CLASS_NAME, 
-                    'VfPpkd-RLmnJb')
+                    (By.CLASS_NAME,
+                     'VfPpkd-RLmnJb')
                 )
             )
             try:
@@ -149,7 +151,6 @@ class Login:
             )
             msg_btn.click()
 
-            
             message = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.XPATH,
@@ -232,13 +233,23 @@ class Login:
         )
         continue_btn.click()
 
+        # I don't know if this possible
+        grab_num_two_driver():
+            gmail_btn = self.wait.until(
+                EC.element_to_be_clickable(
+                    (By.CLASS_NAME,
+                        "gb_g")
+                )
+            )
+
 
 # move to main when ready:
 login = Login()
-print(login.parse_time())
 login.goto_site("tinder")
 login.login_driver()
 login.goto_site("google_voice")
 pin = login.grab_num_driver()
 login.driver.switch_to.window(login.driver.window_handles[0])
 login.enter_tinder(pin)
+login.goto_site("homepage")
+login.grab_num_two_driver()
