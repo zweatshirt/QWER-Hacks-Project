@@ -11,6 +11,7 @@ from waiting import wait
 import random
 
 user_agent = UserAgent()
+
 rand_user = user_agent.random
 
 # needed to bypass captcha
