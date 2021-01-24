@@ -7,7 +7,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from fake_useragent import UserAgent
 import datetime
-from waiting import wait
 import random
 
 user_agent = UserAgent()
@@ -30,7 +29,7 @@ class Login:
         self.email = "coilettebendher@gmail.com"
         self.password = "thisisagenericpassword123"
         self.number = "2247898554"  # number to sign in
-        self.wait = WebDriverWait(self.driver)
+        self.wait = WebDriverWait(self.driver, 50)
 
     def goto_site(self, site):
         # Used JS scripts to ensure that new windows could be opened
@@ -86,6 +85,7 @@ class Login:
     # TODO: finish this portion
     def grab_num_driver(self):
         try:
+            # click sign in button
             login_btn = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.LINK_TEXT, "Sign in")
@@ -93,6 +93,7 @@ class Login:
             )
             login_btn.click()
 
+            # enter email
             sign_in_field = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.XPATH,
@@ -101,6 +102,7 @@ class Login:
             )
             sign_in_field.send_keys(self.email)
 
+            # hit next button
             next_btn = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.XPATH,
@@ -109,6 +111,7 @@ class Login:
             )
             next_btn.click()
 
+            # enter password
             password_field = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.XPATH,
@@ -117,6 +120,7 @@ class Login:
             )
             password_field.send_keys(self.password)
 
+            # hit second next button
             next_btn_two = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.XPATH,
@@ -125,6 +129,7 @@ class Login:
             )
             next_btn_two.click()
 
+            # hit messages button
             msg_btn = self.wait.until(
                 EC.element_to_be_clickable(
                     (By.XPATH,
@@ -133,10 +138,11 @@ class Login:
             )
             msg_btn.click()
 
+            # attempt to click into message, needs work
             message = self.wait.until(
                 EC.element_to_be_clickable(
-                    (By.PARTIAL_LINK_TEXT,
-                     "Your Tinder code is")
+                    (By.CLASS_NAME,
+                     "rkljfb-biJj")
                 )
             )
             message.click()
@@ -148,6 +154,7 @@ class Login:
         pass
 
 
+# move to main when ready:
 login = Login()
 print(login.parse_time())
 login.goto_site("tinder")
