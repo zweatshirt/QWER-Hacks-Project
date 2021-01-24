@@ -154,4 +154,3 @@ login.goto_site("google_voice")
 login.grab_num_driver()
 login.driver.switch_to.window(login.driver.window_handles[0])
 # add login.enter_tinder here
-# pain
